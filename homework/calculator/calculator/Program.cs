@@ -1,4 +1,10 @@
-﻿namespace calculator
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace calculator
 {
     internal class Program
     {
@@ -7,7 +13,7 @@
             Console.WriteLine("Hello, World!");
 
             while (true)
-            {   
+            {
                 Console.WriteLine("Vyberte operaci");
                 Console.WriteLine("1 - secti, 2 - odecti, 3 - vynasob, 4 - vydel, 5 - na druhou, 6 - odmocni");
                 int operation = int.Parse(Console.ReadLine());
@@ -25,7 +31,7 @@
                 }
 
 
-                
+
 
                 double result = 0.0;
 
@@ -48,7 +54,7 @@
                         Console.WriteLine();
                         Console.WriteLine("Nesmite delit 0");
                         continue;
-                    }    
+                    }
 
                     result = Convert.ToDouble(a) / b;
                 }
