@@ -7,110 +7,136 @@ using System.Threading.Tasks;
 namespace calculator
 {
     internal class Program
-        
+
     {
         static void Main(string[] args)
         {
-            string soustava = null;
-            int cisloSoustavy = 0;
             Console.WriteLine("Hello, World!");
 
             while (true)
             {
-                Console.WriteLine("Vyberte operaci"); //Zeptám se uživatele, jakou operaci chce dělat
-                Console.WriteLine("1 - scitani, 2 - odcitani, 3 - nasobeni, 4 - deleni, 5 - mocnina a na b, 6 - prevod soustav, 7 - druha mocnina, 8 - odmocnina, 9 - logaritmus");
-                int operation = int.Parse(Console.ReadLine()); //Zavedu si proměnnou, do které to uložím
-                Console.WriteLine();
-               
-                Console.WriteLine("Zadej a"); 
-                int a = int.Parse(Console.ReadLine()); //Proměnná a pro první číslo
-                Console.WriteLine();
-
-                if (operation == 6)  //Když je zvolená operace "prevod soustav", potřebuji ještě vědět, na kterou soustavu chce uživatel číslo a převádět
+                int operation = ZvoleniOperace();
+                if (operation == -1)
                 {
-                    Console.WriteLine("Na kterou soustavu chces cislo a prevadet?");
-                    cisloSoustavy = int.Parse(Console.ReadLine()); //Uložím do proměnné cisloSoustavy
-                }
-                
-                int b = 0; //Zavedu proměnnou b pro druhé číslo od uživatele
-                if (operation <6) //Cislo b nepotřebuju pro operace větší než 6
-                {
-                    Console.WriteLine("Zadej b");
-                    b = int.Parse(Console.ReadLine());
-                    Console.WriteLine();
+                    Console.WriteLine("Zvolená operace neexistuje");
+                    continue;
                 }
 
-                double result = 0.0; //Zavedu proměnnouy pro výsledek (s použitím desetinných čísel)
+                float result = ProvedeniOperace(operation);
+                ZobrazitVysledek(operation, result);
 
-                switch (operation) 
-                {
-                    case 1: 
-                        result = a + b; //sčítání
-                        break;
-                    
-                    case 2: 
-                        result = a - b; //odčítání
-                        break;
-
-                    case 3: 
-                        result = a * b; //násobení
-                        break;
-
-                    case 4:
-                        if (b == 0) //ochrana proti dělení nulou
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine("Nesmite delit 0");
-                            continue;
-                        }
-                        result = Convert.ToDouble(a) / b; //dělení
-                        break;
-
-                    case 5: 
-                        result = Math.Pow(a, b); //mocnění
-                        break;
-
-                    case 6:
-                        soustava = Convert.ToString(a, cisloSoustavy); //prevod soustav
-                        break;
-
-                    case 7: 
-                        result = Math.Pow(a, 2); //na druhou
-                        break;
-
-                    case 8: 
-                        result = Math.Sqrt(a); //odmocnina
-                        break;
-
-                    case 9: 
-                        result = Math.Log(a); //logaritmus
-                        break;
-
-                    
-
-                    default:
-                        Console.WriteLine("Nevalidni operace"); //pri zadání čísla operace mimo rozsah
-                        break;
-
-                }
-                if (operation <6 || operation>6) //zobrazení výsledku pro operace, mimo prevodu soustav (to je string)
-                Console.WriteLine("Vysledek je: "+result);
-                
-                if (operation == 6) //zobrazení výsledku pro prevod soustav
-                    Console.WriteLine("cislo a ve vybrane soustave: "+ soustava);
-
-                Console.WriteLine(); 
-                Console.WriteLine("Chcete pokracovat? y/n");
+                Console.WriteLine("Do you want to continue? (y/n)");
                 string con = Console.ReadLine();
 
-                if (con != "y") //při stisknutí klávesy "y" se celý cyklus opakuje
+                if (con != "y")
                 {
                     break;
                 }
-                Console.WriteLine();
             }
 
             Console.ReadKey();
         }
+
+        static int ZvoleniOperace()
+        {
+            Console.WriteLine("Vyber operaci:");
+            Console.WriteLine("1 - Sčítání, 2 - Odčítání, 3 - Násobení, 4 - Dělení, 5 - Exponenciály, 6 - Logaritmus, 7 - Převod soustav, 8 - Na druhou, 9 - Odmocnina");
+
+            if (int.TryParse(Console.ReadLine(), out int operation))
+            {
+                if (operation >= 1 && operation <= 9)
+                {
+                    return operation;
+
+                }
+            }
+            return -1;
+        }
+
+        static float ProvedeniOperace(int operation)
+        {
+            if (operation==6)
+            { 
+                Console.WriteLine("Logaritmus o základu a s argumentem b");
+            }
+
+            Console.WriteLine("Zadej 'a':");
+            float a = float.Parse(Console.ReadLine());
+
+            float b = 0;
+
+            if (operation < 7)
+            {
+                Console.WriteLine("Zadej 'b':");
+                b = float.Parse(Console.ReadLine());
+            }
+
+            switch (operation)
+            {
+                case 1:
+                    return a + b;
+
+                case 2:
+                    return a - b;
+
+                case 3:
+                    return a * b;
+
+                case 4:
+                    if (b == 0)
+                    {
+                        Console.WriteLine("Nulou nelze dělit");
+                        return float.NaN;
+                    }
+                    return a / b;
+
+                case 5:
+                    return (float)Math.Pow(a, b);
+                
+                case 6:
+                    return (float)Math.Log(b, a);
+
+                case 7:
+                    Console.WriteLine("Vyber si do jaké soustavy chceš číslo prevést:");
+                    int soustava = int.Parse(Console.ReadLine());
+                    return PrevodSoustavy(a, soustava);
+
+                case 8:
+                    return a * a;
+
+                case 9:
+                    return (float)Math.Sqrt(a);
+
+                
+
+                default:
+                    Console.WriteLine("Zvolená operace neexistuje.");
+                    return float.NaN;
+            }
+        }
+
+        static float PrevodSoustavy(float number, int soustava)
+        {
+            return float.Parse(Convert.ToString(Convert.ToInt64(number), soustava));
+        }
+
+        static void ZobrazitVysledek(int operation, float result)
+        {
+            if (float.IsNaN(result))
+            {
+                return;
+            }
+
+            if (operation == 7)
+            {
+                Console.WriteLine("Číslo ve vybraseé soustavě: "+result);
+            }
+            else
+            {
+                Console.WriteLine("Výsledek: "+result);
+            }
+        }
     }
 }
+
+
