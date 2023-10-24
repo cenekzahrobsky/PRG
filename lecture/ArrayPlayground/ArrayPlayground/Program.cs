@@ -45,8 +45,7 @@ namespace ArrayPlayground
             Console.WriteLine($"Min: {min}");
 
             //TODO 7: Vyhledej v poli číslo, které zadá uživatel, a vypiš index nalezeného prvku do konzole.
-            int index;
-            int userNum = int.Parse(Console.ReadLine());
+            int userNum = 10;
             bool foundNum = false;
             for (int i = 0; i < Array.Length; i++)
             {
@@ -61,15 +60,37 @@ namespace ArrayPlayground
 
             //TODO 8: Změň tvorbu integerového pole tak, že bude obsahovat 100 náhodně vygenerovaných čísel od 0 do 9. Vytvoř si na to proměnnou typu Random.
             Random rnd = new Random();
-            int[] Array1 =new int[100];
-            foreach (int value in Array1) 
-                rnd.Next(9);
-
-
-                //TODO 9: Spočítej kolikrát se každé číslo v poli vyskytuje a spočítané četnosti vypiš do konzole.
-                int[] counts = new int[10];
+            Array = new int[100];
+            for (int i = 0; i < Array.Length; i++)
+            {
+                Array[i] = rnd.Next(0, 10);
+            }
+            
+            //TODO 9: Spočítej kolikrát se každé číslo v poli vyskytuje a spočítané četnosti vypiš do konzole.
+            int[] counts = new int[10];
+            foreach (int number in Array) 
+            {
+                counts[number]++;
+            }
+            for (int i = 0;i < counts.Length;i++)
+            {
+                Console.WriteLine($"Číslo {i} se vyskytuje {counts[i]} krát");
+            }
+            Console.WriteLine();
 
             //TODO 10: Vytvoř druhé pole, do kterého zkopíruješ prvky z prvního pole v opačném pořadí.
+            int[] Array2 = new int[100];
+            for (int i = Array.Length - 1; i >= 0; i--)
+            {
+                Array2[i] = Array[Array2.Length - 1 - i];
+            }
+            Console.WriteLine("Prvni pole");
+            foreach (int number in Array)
+                Console.WriteLine(number);
+
+            Console.WriteLine("Druhe pole");
+            foreach(int number in Array2)
+                Console.WriteLine(number);
 
 
             Console.ReadKey();
