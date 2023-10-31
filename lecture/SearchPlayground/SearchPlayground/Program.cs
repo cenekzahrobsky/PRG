@@ -69,7 +69,20 @@ namespace SearchPlayground
         static int BinarySearchRecursive(int[] array, int elementToSearch, int lower, int upper)
         {
             //TODO naimplementuj binární vyhledávání rekurzivním způsobem (Zamysli se nad parametry, které tato funkce přijímá vzpomeň si na přístup Rozděl a Panuj.)
-            return -1;
+            if (lower>upper)
+            {
+                return -1;
+            }
+            int mid = lower+(upper-lower)/2;
+            if (array[mid] == elementToSearch)
+            {
+                return mid;
+            }
+            if (array[mid] < elementToSearch)
+            {
+                return BinarySearchRecursive(array, elementToSearch, mid + 1, upper);
+            }
+            return BinarySearchRecursive(array, elementToSearch, mid - 1, lower);
         }
 
         //Naplní pole náhodnými rostoucími čísly.
