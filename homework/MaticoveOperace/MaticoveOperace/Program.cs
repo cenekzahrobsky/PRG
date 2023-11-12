@@ -340,18 +340,16 @@ namespace MaticoveOperace
         // Function to multiply two arrays
         static int[,] MultiplyArrays(int[,] array1, int[,] array2)
         {
-            int rows1 = array1.GetLength(0);
-            int cols1 = array1.GetLength(1);
-            int rows2 = array2.GetLength(0);
-            int cols2 = array2.GetLength(1);
+            int rows = array1.GetLength(0);
+            int cols = array1.GetLength(1);
 
-            int[,] resultArray = new int[rows1, cols2];
+            int[,] resultArray = new int[rows, cols];
 
-            for (int i = 0; i < rows1; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols2; j++)
+                for (int j = 0; j < cols; j++)
                 {
-                    for (int k = 0; k < cols1; k++)
+                    for (int k = 0; k < cols; k++)
                     {
                         resultArray[i, j] += array1[i, k] * array2[k, j];
                     }
@@ -363,16 +361,14 @@ namespace MaticoveOperace
         // Function to add two arrays
         static int[,] AddArrays(int[,] array1, int[,] array2)
         {
-            int rows1 = array1.GetLength(0);
-            int cols1 = array1.GetLength(1);
-            int rows2 = array2.GetLength(0);
-            int cols2 = array2.GetLength(1);
+            int rows = array1.GetLength(0);
+            int cols = array1.GetLength(1);
 
-            int[,] resultArray = new int[rows1, cols1];
+            int[,] resultArray = new int[rows, cols];
 
-            for (int i = 0; i < rows1; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols1; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     resultArray[i, j] = array1[i, j] + array2[i, j];
                 }
@@ -383,16 +379,14 @@ namespace MaticoveOperace
         // Function to subtract two arrays
         static int[,] SubtractArrays(int[,] array1, int[,] array2)
         {
-            int rows1 = array1.GetLength(0);
-            int cols1 = array1.GetLength(1);
-            int rows2 = array2.GetLength(0);
-            int cols2 = array2.GetLength(1);
+            int rows = array1.GetLength(0);
+            int cols = array1.GetLength(1);
 
-            int[,] resultArray = new int[rows1, cols1];
+            int[,] resultArray = new int[rows, cols];
 
-            for (int i = 0; i < rows1; i++)
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < cols1; j++)
+                for (int j = 0; j < cols; j++)
                 {
                     resultArray[i, j] = array1[i, j] - array2[i, j];
                 }
