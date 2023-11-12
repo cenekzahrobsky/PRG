@@ -13,6 +13,7 @@ namespace MaticoveOperace
         {
             int[,] resultArray;
 
+            // Main loop for array operations
             Console.WriteLine("Hello, World!");
             while (true)
             {
@@ -33,6 +34,7 @@ namespace MaticoveOperace
                     continue;
                 }
 
+                // Perform the chosen operation
                 resultArray = DoOperation(operation, array1);
 
                 Console.WriteLine("Vysledna matice:");
@@ -154,21 +156,21 @@ namespace MaticoveOperace
                     break;
                 case 7:
                     array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Second matrix:");
+                    Console.WriteLine("Druha matice:");
                     PrintArray(array2);
                     Console.Write("\n");
                     resultArray = AddArrays(array1, array2);
                     break;
                 case 8:
                     array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Second matrix:");
+                    Console.WriteLine("Druha matice:");
                     PrintArray(array2);
                     Console.Write("\n");
                     resultArray = SubtractArrays(array1, array2);
                     break;
                 case 9:
                     array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Second matrix:");
+                    Console.WriteLine("Druha matice:");
                     PrintArray(array2);
                     Console.Write("\n");
                     resultArray = MultiplyArrays(array1, array2);
@@ -182,10 +184,10 @@ namespace MaticoveOperace
         // Function to swap two elements in the array
         static int[,] ElementSwap(int[,] array)
         {
-            Console.WriteLine("Enter the coordinates of the first element:");
+            Console.WriteLine("Zadej souradnice prvniho clenu:");
             int xFirst = int.Parse(Console.ReadLine()) - 1;
             int yFirst = int.Parse(Console.ReadLine()) - 1;
-            Console.WriteLine("Enter the coordinates of the second element:");
+            Console.WriteLine("Zadej souradnice druheho clenu:");
             int xSecond = int.Parse(Console.ReadLine()) - 1;
             int ySecond = int.Parse(Console.ReadLine()) - 1;
 
@@ -198,9 +200,9 @@ namespace MaticoveOperace
         // Function to swap two rows in the array
         static int[,] RowSwap(int[,] array)
         {
-            Console.WriteLine("Enter the number of the first row:");
+            Console.WriteLine("Zadej souradnice prvniho z radku, ktere chces prohodit:");
             int nRowSwap = int.Parse(Console.ReadLine()) - 1;
-            Console.WriteLine("Enter the number of the second row:");
+            Console.WriteLine("Zadej souradnice druheho z radku, ktere chces prohodit:");
             int mRowSwap = int.Parse(Console.ReadLine()) - 1;
 
             int[] tempArrrayR = new int[array.GetLength(1)];
@@ -225,9 +227,9 @@ namespace MaticoveOperace
         // Function to swap two columns in the array
         static int[,] ColumnSwap(int[,] array)
         {
-            Console.WriteLine("Enter the number of the first column:");
+            Console.WriteLine("Zadej souradnice prvniho ze sloupcu, ktere chces prohodit:");
             int nColSwap = int.Parse(Console.ReadLine()) - 1;
-            Console.WriteLine("Enter the number of the second column:");
+            Console.WriteLine("Zadej souradnice druheho ze sloupcu, ktere chces prohodit:");
             int mColSwap = int.Parse(Console.ReadLine()) - 1;
 
             int[] tempArrrayC = new int[array.GetLength(0)];
@@ -252,7 +254,7 @@ namespace MaticoveOperace
         // Function to multiply the array by a chosen number
         static int[,] MultiplyArray(int[,] array)
         {
-            Console.WriteLine("Choose the number by which you want to multiply the matrix:");
+            Console.WriteLine("Zadej cislo, kterym chces matici nasobit:");
             int multiplier = int.Parse(Console.ReadLine());
             int rows = array.GetLength(0);
             int cols = array.GetLength(1);
@@ -271,8 +273,8 @@ namespace MaticoveOperace
         // Function to prompt the user to choose a diagonal
         static int DiagonalChoice()
         {
-            Console.WriteLine("Choose the diagonal:");
-            Console.WriteLine("1 - Main diagonal, 2 - Secondary diagonal");
+            Console.WriteLine("Vyber diagonalu:");
+            Console.WriteLine("1 - Hlavni diagonala, 2 - Vedlejsi diagonala");
             int diagonal = int.Parse(Console.ReadLine());
 
             if (diagonal >= 1 && diagonal <= 2)
