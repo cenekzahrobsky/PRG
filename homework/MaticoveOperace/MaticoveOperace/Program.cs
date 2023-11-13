@@ -19,7 +19,7 @@ namespace MaticoveOperace
             {
                 Console.WriteLine("Kolik chces radku pro prvni matici?");
                 int row1 = int.Parse(Console.ReadLine());
-                Console.WriteLine("Kolik chces radku pro prvni matici?");
+                Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
                 int col1 = int.Parse(Console.ReadLine());
                 int[,] array1 = CreateArray(row1, col1);
 
@@ -184,10 +184,10 @@ namespace MaticoveOperace
         // Function to swap two elements in the array
         static int[,] ElementSwap(int[,] array)
         {
-            Console.WriteLine("Zadej souradnice prvniho clenu:");
+            Console.WriteLine("Zadej souradnice prvniho z prvku, ktere chces prohodit, soradnice zadavej po jednom (prvni prvek je 1,1):");
             int xFirst = int.Parse(Console.ReadLine()) - 1;
             int yFirst = int.Parse(Console.ReadLine()) - 1;
-            Console.WriteLine("Zadej souradnice druheho clenu:");
+            Console.WriteLine("Zadej souradnice druheho z prvku, ktere chces prohodit, soradnice zadavej po jednom (prvni prvek je 1,1):");
             int xSecond = int.Parse(Console.ReadLine()) - 1;
             int ySecond = int.Parse(Console.ReadLine()) - 1;
 
@@ -314,7 +314,7 @@ namespace MaticoveOperace
             {
                 for (int i = 0; i < rows; i++)
                 {
-                    resultArray[i, rows - 1 - i] = array[i, i];
+                    resultArray[i, rows - 1 - i] = array[rows - 1 - i, i];
                 }
             }
             return resultArray;
