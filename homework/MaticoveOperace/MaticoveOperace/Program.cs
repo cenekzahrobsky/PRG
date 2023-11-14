@@ -15,17 +15,19 @@ namespace MaticoveOperace
 
             // Main loop for array operations
             Console.WriteLine("Hello, World!");
+            Console.WriteLine("Kolik chces radku pro prvni matici?");
+            int row1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
+            int col1 = int.Parse(Console.ReadLine());
+            int[,] array1 = CreateArray(row1, col1);
+
+            Console.WriteLine("Prvni matice:");
+            PrintArray(array1);
+            Console.Write("\n");
+
             while (true)
             {
-                Console.WriteLine("Kolik chces radku pro prvni matici?");
-                int row1 = int.Parse(Console.ReadLine());
-                Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
-                int col1 = int.Parse(Console.ReadLine());
-                int[,] array1 = CreateArray(row1, col1);
-
-                Console.WriteLine("Prvni matice:");
-                PrintArray(array1);
-                Console.Write("\n");
+                
 
                 int operation = OperationChoice();
                 if (operation == -1)

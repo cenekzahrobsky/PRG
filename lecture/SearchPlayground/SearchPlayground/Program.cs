@@ -146,10 +146,10 @@ namespace SearchPlayground
             WriteArrayToConsole(smallArray, "Malé pole");
             SearchArray(smallArray, "Malé pole");
 
-            //WriteArrayToConsole(mediumArray, "Střední pole");
+            WriteArrayToConsole(mediumArray, "Střední pole");
             SearchArray(mediumArray, "Střední pole");
 
-            //WriteArrayToConsole(largeArray, "Velké pole");
+            WriteArrayToConsole(largeArray, "Velké pole");
             SearchArray(largeArray, "Velké pole");
 
             Console.ReadKey();
