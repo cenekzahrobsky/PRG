@@ -11,24 +11,21 @@ namespace MaticoveOperace
     {
         static void Main(string[] args)
         {
-            int[,] resultArray;
-
-            // Main loop for array operations
             Console.WriteLine("Hello, World!");
-            Console.WriteLine("Kolik chces radku pro prvni matici?");
-            int row1 = int.Parse(Console.ReadLine());
-            Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
-            int col1 = int.Parse(Console.ReadLine());
-            int[,] array1 = CreateArray(row1, col1);
 
+            Console.WriteLine("Kolik chces radku pro prvni matici?");
+            int rows = int.Parse(Console.ReadLine());
+            Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
+            int cols = int.Parse(Console.ReadLine());
+            int[,] array1 = CreateArray(rows, cols);
             Console.WriteLine("Prvni matice:");
             PrintArray(array1);
-            Console.Write("\n");
 
-            while (true)
+            // Main loop for array operations
+            int[,] resultArray; 
+            bool continueWhile = true;
+            while (continueWhile == true) 
             {
-                
-
                 int operation = OperationChoice();
                 if (operation == -1)
                 {
@@ -42,11 +39,32 @@ namespace MaticoveOperace
                 Console.WriteLine("Vysledna matice:");
                 PrintArray(resultArray);
 
-                Console.WriteLine("Chces pokracovat? (y/n)");
-                string continueOption = Console.ReadLine();
-                if (continueOption != "y")
+                Console.WriteLine("Chces pokracovat?");
+                Console.WriteLine("1: Pokracovat s vyslednou matici");
+                Console.WriteLine("2: Pokracovat od zacatku");
+                Console.WriteLine("3: Konec");
+                int continueOption = int.Parse(Console.ReadLine());
+                
+                switch (continueOption) 
                 {
-                    break;
+                    case 1:
+                        array1 = resultArray;
+                        Console.WriteLine("Prvni matice:");
+                        PrintArray(array1);
+                        break;
+                    case 2:
+                        Console.WriteLine("Kolik chces radku pro prvni matici?");
+                        rows = int.Parse(Console.ReadLine());
+                        Console.WriteLine("Kolik chces sloupcu pro prvni matici?");
+                        rows = int.Parse(Console.ReadLine());
+                        array1 = CreateArray(rows, cols);
+                        Console.WriteLine("Prvni matice:");
+                        PrintArray(array1);
+                        
+                        break;
+                    default:
+                        continueWhile = false;
+                        break;
                 }
             }
             Console.ReadKey();
@@ -56,6 +74,7 @@ namespace MaticoveOperace
         static int[,] CreateArray(int rows, int cols)
         {
             int[,] array = new int[rows, cols];
+            
             Console.WriteLine("Vyber zpusob vyplneni matice:");
             Console.WriteLine("1: postupka od 1 do x*y (1,2,3,...)");
             Console.WriteLine("2: nahodna cisla");
@@ -89,6 +108,17 @@ namespace MaticoveOperace
                     break;
             }
             return array;
+        }
+
+        static int[,] CreateArray2(int[,] array1)
+        {
+            int[,] array2;
+            int rows = array1.GetLength(0);
+            int cols = array1.GetLength(1);
+            array2 = CreateArray(rows, cols);
+            Console.WriteLine("Druha matice:");
+            PrintArray(array2);
+            return array2;
         }
 
         // Function to prompt the user to choose an array operation
@@ -131,10 +161,9 @@ namespace MaticoveOperace
         // Function to perform the chosen array operation
         static int[,] DoOperation(int operation, int[,] array1)
         {
+            int[,] array2;
             int[,] resultArray;
             int diagonal;
-            int[,] array2;
-
             switch (operation)
             {
                 case 1:
@@ -157,24 +186,15 @@ namespace MaticoveOperace
                     resultArray = TransposeArray(array1);
                     break;
                 case 7:
-                    array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Druha matice:");
-                    PrintArray(array2);
-                    Console.Write("\n");
+                    array2 = CreateArray2(array1);
                     resultArray = AddArrays(array1, array2);
                     break;
                 case 8:
-                    array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Druha matice:");
-                    PrintArray(array2);
-                    Console.Write("\n");
+                    array2 = CreateArray2(array1);
                     resultArray = SubtractArrays(array1, array2);
                     break;
                 case 9:
-                    array2 = CreateArray(array1.GetLength(0), array1.GetLength(1));
-                    Console.WriteLine("Druha matice:");
-                    PrintArray(array2);
-                    Console.Write("\n");
+                    array2 = CreateArray2(array1);
                     resultArray = MultiplyArrays(array1, array2);
                     break;
                 default:
