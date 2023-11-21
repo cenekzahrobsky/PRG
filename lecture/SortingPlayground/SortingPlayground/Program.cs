@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -71,6 +74,66 @@ namespace SortingPlayground
             return sortedArray;
         }
 
+        static int[] Sort(int[] array, int start, int end)
+        {
+            int[] sortedArray = (int[])array.Clone();
+            if (end > start)
+            {
+                int middle = (start + end) / 2;
+                Sort(array, start, middle);
+                Sort(array, middle + 1, end);
+                sortedArray = MergeSort(array, start, middle, end);
+            }
+            return sortedArray;
+        }
+
+        static int[] MergeSort(int[] array, int start, int middle, int end)
+        {
+             // Řaď v tomto poli, ve kterém je výchoze zkopírováno všechno ze vstupního pole.
+            int nl = middle - start + 1;
+            int nr = end - middle;
+
+            int[] tmpL = new int[nl];
+            int[] tmpR = new int[nr];
+            int i, j;
+
+            for (i = 0; i < nl; i++)
+                tmpL[i] = array[start + i];
+            for (j = 0; j < nr; j++)
+                tmpR[j] = array[middle + j + 1];
+
+            i = 0;
+            j = 0;
+            int k = start;
+            while (i < nl && j < nr)
+            {
+                if (tmpL[i] < tmpR[j])
+                {
+                    array[k] = tmpL[i];
+                    i++;
+                }
+                else
+                {
+                    array[k] = tmpR[j];
+                    j++;
+                }
+                k++;
+            }
+            while (i < nl)
+            {
+                array[k] = tmpL[i];
+                i++;
+                k++;
+            }
+            while (j < nr)
+            {
+                array[k] = tmpR[j];
+                j++;
+                k++;
+            }
+            return array;
+        }
+
         //Naplní pole náhodnými čísly mezi 1 a velikostí pole.
         static void FillArray(int[] array)
         {
@@ -110,6 +173,9 @@ namespace SortingPlayground
 
             sortedArray = InsertionSort(array);
             WriteArrayToConsole(sortedArray, arrayName + " seřazené Insertion sortem");
+
+            sortedArray = Sort(array, 0, array.Length - 1);
+            WriteArrayToConsole(sortedArray, arrayName + " seřazené Merge sortem");
 
             Console.WriteLine();
         }
