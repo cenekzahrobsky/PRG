@@ -10,25 +10,19 @@ namespace BlackjackSch
     {
         public List<Card> Hand { get; set; }
         public int Score { get; set; }
+        public string Nickname { get; set; }
 
         public Player()
         {
             Hand = new List<Card>();
             Score = 0;
+            Nickname = GetPlayerNickname();
         }
-
-        public void CalculateScore()
+        private string GetPlayerNickname()
         {
-            Score = Hand.Sum(card => card.Value);
-            if (Score > 21)
-            {
-                foreach (var card in Hand.Where(card => card.Face == "A"))
-                {
-                    Score -= 10;
-                    if (Score <= 21)
-                        break;
-                }
-            }
+            Console.WriteLine("Welcome to the Blackjack game!");
+            Console.Write("Enter your nickname: ");
+            return Console.ReadLine();
         }
     }
 }

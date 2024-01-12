@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{56AC4212-B4C9-40CD-ACB0-55E3794CA850}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BlackjackSch</RootNamespace>
-    <AssemblyName>BlackjackSch</AssemblyName>
+    <RootNamespace>Blackjack</RootNamespace>
+    <AssemblyName>Blackjack</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -8,27 +8,30 @@ namespace BlackjackSch
 {
     internal class Deck
     {
-        private List<Card> cards;
+        public List<Card> cards;
 
         public Deck()
         {
             cards = new List<Card>();
-            string[] suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
+            string[] suits = { "Hearts ♥", "Diamonds ♦", "Clubs ♣", "Spades ♠" };
             string[] faces = { "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A" };
 
             foreach (var suit in suits)
             {
                 foreach (var face in faces)
                 {
-                    int value = (face == "A") ? 11 : (face == "J" || face == "Q" || face == "K") ? 10 : int.Parse(face);
+                    int value;
+                    if (face == "A") value = 11;
+                    else if (face == "J" || face == "Q" || face == "K") value = 10;
+                    else value = int.Parse(face);
                     cards.Add(new Card { Suit = suit, Face = face, Value = value });
                 }
             }
         }
         public void Shuffle()
         {
-            Random rand = new Random();
-            cards = cards.OrderBy(c => rand.Next()).ToList();
+            Random rnd = new Random();
+            cards = cards.OrderBy(c => rnd.Next()).ToList(); //tady poradilo gpt, nevedel jsem, jak ty karty zamichat jinak nez nejakym slozitym cyklem
         }
 
         public Card DealCard()
